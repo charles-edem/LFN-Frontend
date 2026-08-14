@@ -1,0 +1,98 @@
+:root {
+  --color-primary: #2563eb;
+  --color-primary-dark: #1742b8;
+  --color-text-dark: #0f172a;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  --font-main: 'Inter', sans-serif;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 40px;
+  font-family: var(--font-main);
+}
+
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoBadge {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.brandName {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.navLinks {
+  display: flex;
+  gap: 32px;
+}
+
+.navLink {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color 0.7s ease;
+  padding: 8px 0;
+}
+
+.navLink:hover {
+  transition: 0.7s ease;
+  color: var(--color-text-dark);
+  border-bottom: 3px solid var(--color-text-dark);
+  border-radius: 2px;
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.signInButton {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: 8px;
+  padding: 9px 18px;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.signInButton:hover {
+  background: #eff6ff;
+}
+
+.joinButton {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: var(--color-primary);
+  border-radius: 8px;
+  padding: 9px 18px;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.joinButton:hover {
+  background: var(--color-primary-dark);
+}

@@ -1,0 +1,282 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 15px;
+  padding: 40px 36px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
+
+.mobileHeader {
+  display: none;
+}
+
+.iconCircle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.iconCircle svg {
+  color: var(--color-primary);
+  font-size: 24px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  margin: 0 0 10px;
+}
+
+.subtext {
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0 0 28px;
+}
+
+.subtextMobile {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.otpRow {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.otpBox {
+  width: 44px;
+  height: 52px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  border: 1px solid var(--color-input-border);
+  border-radius: 10px;
+  background: #fbfcfe;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.otpBox:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
+}
+
+.otpBoxError {
+  border-color: var(--color-error);
+}
+
+.resendRow {
+  margin-bottom: 22px;
+}
+
+.resendTimer {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.resendLink {
+  font-size: 13px;
+  color: var(--color-primary);
+  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.resendLink:disabled {
+  color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.submitButton {
+  width: 100%;
+  background: linear-gradient(180deg, #2f6df0, var(--color-primary));
+  color: white;
+  border: none;
+  border-radius: 9px;
+  padding: 13px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px -2px rgba(37, 99, 235, 0.4);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.submitButton:disabled {
+  background: #cbd5e1;
+  color: #64748b;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.wrongNumber {
+  font-size: 12.5px;
+  color: var(--color-text-muted);
+  margin-top: 18px;
+}
+
+.wrongNumberLink {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.errorText {
+  color: var(--color-error);
+  font-size: 12.5px;
+  margin-top: 14px;
+}
+
+@media (max-width: 640px) {
+  .page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100dvh;
+    overflow-y: auto;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid grey;
+    border-radius: 24px;
+    box-shadow: none;
+    padding: 0 20px 32px;
+    margin: 0;
+    text-align: left;
+  }
+
+  .mobileHeader {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 24px 20px 20px;
+    margin: 0 -20px 30px;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .backButton {
+    width: 48px;
+    height: 48px;
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logoBadge {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobileTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin: 0;
+  }
+
+  .iconCircle {
+    width: 100px;
+    height: 100px;
+    margin: 24px auto 24px;
+  }
+
+  .iconCircle svg {
+    width: 50px;
+    height: 50px;
+  }
+
+  .title,
+  .subtext {
+    text-align: center;
+  }
+
+  .title {
+    font-size: 30px;
+    padding-top: 10px;
+    margin-bottom: 12px;
+  }
+
+  .subtext {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+  }
+
+  .otpRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .otpBox {
+    flex: 1;
+    max-width: 56px;
+    aspect-ratio: 1;
+  }
+
+  .resendRow {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .resendTimer,
+  .resendLink {
+    font-size: 16px;
+  }
+
+  .submitButton {
+    width: 100%;
+    margin-top: 30px;
+    padding: 16px;
+    font-size: 18px;
+  }
+
+  .wrongNumber {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 15px;
+  }
+}

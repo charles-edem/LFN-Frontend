@@ -1,0 +1,199 @@
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 60px 20px 60px;
+  text-align: center;
+}
+
+.illustrationWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.illustration {
+  width: 220px;
+  height: auto;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.eyebrowLine {
+  width: 30px;
+  height: 1px;
+  background: #c7d6f0;
+}
+
+.eyebrowText {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #0a6dee;
+}
+
+.heading {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #14181f;
+  margin: 0 0 14px;
+}
+
+.subText {
+  font-size: 15px;
+  color: #6e6e76;
+  line-height: 1.6;
+  max-width: 440px;
+  margin: 0 auto 32px;
+}
+
+.subTextShort {
+  display: none;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #0a6dee;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 15px 24px;
+  border-radius: 14px;
+  box-shadow: 0 10px 22px rgba(10, 109, 238, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(10, 109, 238, 0.36);
+}
+
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  color: #14181f;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 15px 24px;
+  border-radius: 14px;
+  border: 1.5px solid #e3e7ee;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.secondaryButton:hover {
+  border-color: #0a6dee;
+  color: #0a6dee;
+  background: #f5f9ff;
+}
+
+.tryLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+
+.tryLabel {
+  color: #9a9aa2;
+}
+
+.tryLink {
+  color: #0a6dee;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.tryLink:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 40px 20px 40px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .illustration {
+    width: 180px;
+  }
+
+  .heading {
+    font-size: 26px;
+  }
+
+  .subText {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  .subTextLong {
+    display: none;
+  }
+
+  .subTextShort {
+    display: block;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 40px;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    justify-content: center;
+    width: 100%;
+    padding: 15px;
+  }
+
+  .tryLinks {
+    gap: 12px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .pricingLink {
+    display: none;
+  }
+}
+@media (max-width: 360px) {
+  .illustration {
+    width: 150px;
+  }
+
+  .heading {
+    font-size: 22px;
+  }
+
+  .eyebrowLine {
+    width: 20px;
+  }
+}

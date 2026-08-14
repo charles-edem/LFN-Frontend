@@ -1,0 +1,249 @@
+.page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  padding: 40px 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.mobileNavBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 50px;
+}
+
+.heading {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: #14181f;
+  margin: 0 0 10px;
+}
+
+.subText {
+  font-size: 13.5px;
+  color: #6e6e76;
+  line-height: 1.5;
+  margin: 0 0 28px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #14181f;
+}
+
+.input {
+  width: 100%;
+  font-size: 14px;
+  padding: 14px 16px;
+  border: 1.5px solid #e3e7ee;
+  border-radius: 12px;
+  outline: none;
+  color: #14181f;
+  background: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input::placeholder {
+  color: #a5a9b3;
+}
+
+.input:focus {
+  border-color: #0a6dee;
+  box-shadow: 0 0 0 3px rgba(10, 109, 238, 0.12);
+}
+
+.passwordWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordWrap .input {
+  padding-right: 44px;
+}
+
+.eyeToggle {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #9a9aa2;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.eyeToggle:hover {
+  color: #6e6e76;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  color: #14181f;
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: #0a6dee;
+  cursor: pointer;
+}
+
+.forgotLink {
+  font-size: 13.5px;
+  color: #0a6dee;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.forgotLink:hover {
+  text-decoration: underline;
+}
+
+.submitButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #0a6dee;
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  padding: 16px;
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 6px;
+  box-shadow: 0 10px 22px rgba(10, 109, 238, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(10, 109, 238, 0.36);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.contactText {
+  text-align: center;
+  font-size: 13px;
+  color: #6e6e76;
+  margin: 28px 0 8px;
+}
+
+.contactLink {
+  color: #0a6dee;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contactLink:hover {
+  text-decoration: underline;
+}
+
+.footerText {
+  text-align: center;
+  font-size: 11.5px;
+  color: #b5b8c0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.footerIcon {
+  font-size: 11px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    max-width: 440px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 32px 20px;
+    align-items: flex-start;
+  }
+
+  .heading {
+    font-size: 24px;
+  }
+
+  .subText {
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+
+  .form {
+    gap: 16px;
+  }
+
+  .input {
+    padding: 13px 14px;
+  }
+
+  .submitButton {
+    padding: 15px;
+  }
+
+  .row {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+
+@media (max-width: 340px) {
+  .row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

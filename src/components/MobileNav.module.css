@@ -1,0 +1,20 @@
+.logoBadge {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.brandName {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(43, 43, 43);
+}
+.hamburgerIcon {
+    margin-left: auto;
+}
