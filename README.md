@@ -18,26 +18,6 @@ JavaScript
 React Router
 CSS Modules
 ESLint
-Project Structure
-LFN-Frontend/
-├── public/
-├── src/
-│   ├── lib/
-│   │   └── mockApi.js
-│   ├── pages/
-│   │   ├── AdminDashboard.jsx
-│   │   ├── AdminDashboard.module.css
-│   │   ├── LandingPage.jsx
-│   │   ├── LandingPage.module.css
-│   │   ├── OtpVerificationPage.jsx
-│   │   ├── RegistrationPage.jsx
-│   │   ├── SuccessPage.jsx
-│   │   └── SuccessPage.module.css
-│   ├── App.jsx
-│   └── main.jsx
-├── package.json
-├── vite.config.js
-└── README.md
 
 Getting Started
 Requirements
