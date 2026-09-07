@@ -1,27 +1,21 @@
-import { useForm, useWatch } from "react-hook-form";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-
-import { useContext } from "react";
+import { useForm, useWatch, Controller } from "react-hook-form";
+import { useEffect, useState, useContext } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../lib/AuthContext";
-
 import styles from "./RegistrationPage.module.css";
 import { registerUser } from "../lib/mockApi";
-
-import { Controller } from "react-hook-form";
 import Dropdown from "../components/Dropdown";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChartLine,
-  faUsers,
-  faShieldHalved,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChartLine, faUsers, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
 
 export default function RegistrationPage() {
-  const {setUserData, setRegistrationStep} = useContext(AuthContext)
+  const { setUserData, setRegistrationStep } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const referralCode = searchParams.get("ref");
+  const hasReferralLink = Boolean(referralCode);
+  const [submitError, setSubmitError] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -33,22 +27,44 @@ export default function RegistrationPage() {
     defaultValues: {
       age_range: "",
       how_did_you_hear: "",
+      referred_by: referralCode || "",
+      mobile: "",
+      whatsapp: "",
+      first_name: "",
+      last_name: "",
+      email: "",
+      university_community: "",
+      consent_communications: false,
+      community_participation: false,
+      image_video_usage: false,
     },
   });
 
-  const navigate = useNavigate();
+  const howDidYouHear = useWatch({ control, name: "how_did_you_hear" });
+  const mobileValue = useWatch({ control, name: "mobile" });
+  const whatsappValue = useWatch({ control, name: "whatsapp" });
+
+  useEffect(() => {
+    if (referralCode) {
+      setValue("referred_by", referralCode, { shouldValidate: true });
+    }
+  }, [referralCode, setValue]);
+
+  useEffect(() => {
+    const isValidMobile = /^(?:\+233|0)(2[0-9]|5[0-9])[0-9]{7}$/.test(mobileValue || "");
+    if (isValidMobile && !whatsappValue) {
+      setValue("whatsapp", mobileValue, { shouldValidate: true });
+    }
+  }, [mobileValue, whatsappValue, setValue]);
 
   const normalizeGhanaPhone = (phone) => {
     if (!phone) return "";
-    if (phone.startsWith("0")) {
-      return `+233${phone.substring(1)}`;
-    }
+    if (phone.startsWith("0")) return `+233${phone.substring(1)}`;
     return phone;
   };
 
-  const [submitError, setSubmitError] = useState(null);
-
   async function onSubmit(data) {
+    setSubmitError(null);
     const timestamp = new Date().toISOString();
 
     const registrationData = {
@@ -74,48 +90,26 @@ export default function RegistrationPage() {
           accepted: data.image_video_usage,
           acceptedAt: data.image_video_usage ? timestamp : null,
         },
-      }
+      },
     };
 
     try {
       const response = await registerUser(registrationData);
-      setUserData(registrationData); 
-      setRegistrationStep(1);
+      console.log("Registration data:", registrationData);
 
       if (response.success) {
+        setUserData(response.user);
+        setRegistrationStep(1);
         navigate("/verify");
         console.log("Registration successful");
       } else {
         setSubmitError(response.message || "Registration failed");
       }
-    } catch {
-      setSubmitError(
-        "Something went wrong. Please check your connection and try again.",
-      );
+    } catch (error) {
+      console.error("Registration error:", error);
+      setSubmitError(error.message || "Something went wrong. Please try again.");
     }
   }
-
-  const universityCommunityValue = useWatch({
-    control,
-    name: "how_did_you_hear",
-  });
-
-  const mobileValue = useWatch({ control, name: "mobile" });
-  const whatsappValue = useWatch({ control, name: "whatsapp" });
-
-  useEffect(() => {
-    const isValidMobile = /^(?:\+233|0)(2[0-9]|5[0-9])[0-9]{7}$/.test(
-      mobileValue || "",
-    );
-
-    if (isValidMobile && !whatsappValue) {
-      setValue("whatsapp", mobileValue);
-    }
-  }, [mobileValue, whatsappValue, setValue]);
-
-  const [searchParams] = useSearchParams();
-  const referralCode = searchParams.get("ref");
-  const hasReferralLink = Boolean(referralCode);
 
   return (
     <div className={styles.page}>
@@ -136,31 +130,27 @@ export default function RegistrationPage() {
             </div>
             <div>
               <p className={styles.featureTitle}>Real Feedback</p>
-              <p className={styles.featureDesc}>
-                Get paid for honest, verified feedback.
-              </p>
+              <p className={styles.featureDesc}>Get paid for honest, verified feedback.</p>
             </div>
           </div>
+
           <div className={styles.featureItem}>
             <div className={styles.iconCircle}>
               <FontAwesomeIcon icon={faUsers} />
             </div>
             <div>
               <p className={styles.featureTitle}>Accountable community</p>
-              <p className={styles.featureDesc}>
-                Peer-validated, not anonymous.
-              </p>
+              <p className={styles.featureDesc}>Peer-validated, not anonymous.</p>
             </div>
           </div>
+
           <div className={styles.featureItem}>
             <div className={styles.iconCircle}>
               <FontAwesomeIcon icon={faShieldHalved} />
             </div>
             <div>
               <p className={styles.featureTitle}>No gatekeeping</p>
-              <p className={styles.featureDesc}>
-                Transparent rewards, disclosed every time.
-              </p>
+              <p className={styles.featureDesc}>Transparent rewards, disclosed every time.</p>
             </div>
           </div>
         </div>
@@ -181,6 +171,7 @@ export default function RegistrationPage() {
             <p className={styles.statLabel}>Satisfaction Rate</p>
           </div>
         </div>
+
         <div className={styles.avatarSection}>
           <div className={styles.avatarRow}>
             <div className={styles.avatar}></div>
@@ -189,9 +180,7 @@ export default function RegistrationPage() {
             <div className={styles.avatar}></div>
             <div className={styles.avatar}></div>
           </div>
-          <span style={{ fontSize: "12px", color: "#dbeafe" }}>
-            Joined this week
-          </span>
+          <span style={{ fontSize: "12px", color: "#dbeafe" }}>Joined this week</span>
         </div>
       </div>
 
@@ -209,6 +198,7 @@ export default function RegistrationPage() {
             <p className={styles.mobileTitle}>Create your account</p>
           </div>
         </div>
+
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.row}>
             <div className={styles.field}>
@@ -319,31 +309,17 @@ export default function RegistrationPage() {
               <Controller
                 name="age_range"
                 control={control}
-                rules={{
-                  required: "Age range is required",
-                }}
+                rules={{ required: "Age range is required" }}
                 render={({ field }) => (
                   <Dropdown
                     value={field.value}
                     onChange={field.onChange}
                     placeholder="Select range"
                     options={[
-                      {
-                        value: "18-24",
-                        label: "18-24",
-                      },
-                      {
-                        value: "25-34",
-                        label: "25-34",
-                      },
-                      {
-                        value: "35-44",
-                        label: "35-44",
-                      },
-                      {
-                        value: "45+",
-                        label: "45+",
-                      },
+                      { value: "18-24", label: "18-24" },
+                      { value: "25-34", label: "25-34" },
+                      { value: "35-44", label: "35-44" },
+                      { value: "45+", label: "45+" },
                     ]}
                     error={errors.age_range?.message}
                   />
@@ -357,10 +333,11 @@ export default function RegistrationPage() {
                 className={styles.input}
                 type="text"
                 readOnly={hasReferralLink}
-                defaultValue={referralCode || ""}
                 {...register("referred_by")}
               />
-              {hasReferralLink && <p className={styles.hintSuccess}>Applied</p>}
+              {hasReferralLink && (
+                <p className={styles.hintSuccess}>Applied</p>
+              )}
             </div>
           </div>
 
@@ -369,63 +346,25 @@ export default function RegistrationPage() {
             <Controller
               name="how_did_you_hear"
               control={control}
-              rules={{
-                required: "Please select an option",
-              }}
+              rules={{ required: "Please select an option" }}
               render={({ field }) => (
                 <Dropdown
                   value={field.value}
                   onChange={field.onChange}
                   placeholder="Select a source"
                   options={[
-                    {
-                      value: "instagram",
-                      label: "Instagram",
-                    },
-                    {
-                      value: "tiktok",
-                      label: "TikTok",
-                    },
-                    {
-                      value: "facebook",
-                      label: "Facebook",
-                    },
-                    {
-                      value: "university-community",
-                      label: "University/Community",
-                    },
-                    {
-                      value: "snapchat",
-                      label: "Snapchat",
-                    },
-                    {
-                      value: "linkedin",
-                      label: "LinkedIn",
-                    },
-                    {
-                      value: "x",
-                      label: "X",
-                    },
-                    {
-                      value: "word-of-mouth",
-                      label: "Word of Mouth",
-                    },
-                    {
-                      value: "email",
-                      label: "Email",
-                    },
-                    {
-                      value: "pulse-africa",
-                      label: "Pulse Africa",
-                    },
-                    {
-                      value: "space-jam-event",
-                      label: "Space Jam Event",
-                    },
-                    {
-                      value: "other",
-                      label: "Other",
-                    },
+                    { value: "instagram", label: "Instagram" },
+                    { value: "tiktok", label: "TikTok" },
+                    { value: "facebook", label: "Facebook" },
+                    { value: "university-community", label: "University/Community" },
+                    { value: "snapchat", label: "Snapchat" },
+                    { value: "linkedin", label: "LinkedIn" },
+                    { value: "x", label: "X" },
+                    { value: "word-of-mouth", label: "Word of Mouth" },
+                    { value: "email", label: "Email" },
+                    { value: "pulse-africa", label: "Pulse Africa" },
+                    { value: "space-jam-event", label: "Space Jam Event" },
+                    { value: "other", label: "Other" },
                   ]}
                   error={errors.how_did_you_hear?.message}
                 />
@@ -433,7 +372,7 @@ export default function RegistrationPage() {
             />
           </div>
 
-          {universityCommunityValue === "university-community" && (
+          {howDidYouHear === "university-community" && (
             <div className={styles.field}>
               <label className={styles.label}>University/Community</label>
               <input
@@ -444,6 +383,11 @@ export default function RegistrationPage() {
                   setValueAs: (value) => value.trim(),
                 })}
               />
+              {errors.university_community && (
+                <p className={styles.errorText}>
+                  {errors.university_community.message}
+                </p>
+              )}
             </div>
           )}
 
@@ -458,6 +402,7 @@ export default function RegistrationPage() {
               I agree to receive communications from LFN including updates,
               announcements and offers.
             </label>
+
             {errors.consent_communications && (
               <p className={styles.errorText}>
                 {errors.consent_communications.message}
@@ -474,6 +419,7 @@ export default function RegistrationPage() {
               I agree to participate in the LFN community in line with community
               guidelines.
             </label>
+
             {errors.community_participation && (
               <p className={styles.errorText}>
                 {errors.community_participation.message}
@@ -484,13 +430,13 @@ export default function RegistrationPage() {
               <input
                 type="checkbox"
                 {...register("image_video_usage", {
-                  required:
-                    "Please agree to the potential use of your image and/or video",
+                  required: "Please agree to the potential use of your image and/or video",
                 })}
               />
               I agree to the potential use of my image and/or video in LFN
               content.
             </label>
+
             {errors.image_video_usage && (
               <p className={styles.errorText}>
                 {errors.image_video_usage.message}
@@ -505,7 +451,10 @@ export default function RegistrationPage() {
           >
             Join LFN
           </button>
-          {submitError && <p className={styles.errorText}>{submitError}</p>}
+
+          {submitError && (
+            <p className={styles.errorText}>{submitError}</p>
+          )}
         </form>
       </div>
     </div>

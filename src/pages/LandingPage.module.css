@@ -71,7 +71,7 @@
 
 .ctaRow {
   display: flex;
-  gap: 12px;
+  gap: 7px;
 }
 
 .primaryCta {
@@ -225,7 +225,6 @@
 @media (max-width: 640px) {
   .page {
     width: 100%;
-    min-height: 100dvh;
     overflow: hidden;
   }
 
@@ -271,8 +270,10 @@
   }
 
   .heading {
-    font-weight: 500;
-    font-size: 1.6rem;
+    margin-top: 30px;
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1.2;
   }
 
   .headingAccent {
@@ -314,13 +315,14 @@
   .ctaRow {
     margin-top: auto;
     padding-bottom: 20px;
-    gap: 10px;
+    gap: 5px;
   }
 
   .primaryCta {
     width: 100%;
     text-align: center;
-    padding: 15px;
+    padding: 16px;
+    border-radius: 9px;
   }
 
   .secondaryCta {
@@ -328,9 +330,11 @@
   }
 
   .microcopy {
+    margin-bottom: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 12.5px;
   }
 }
 
@@ -380,8 +384,9 @@
   }
 
   .heading {
-    font-weight: 500;
-    font-size: 1.6rem;
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1.2;
   }
 
   .headingAccent {

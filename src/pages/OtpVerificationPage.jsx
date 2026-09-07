@@ -57,38 +57,44 @@ export default function OtpVerificationPage() {
   const isComplete = otpValues.every((v) => v !== "");
 
   async function handleSubmit(e) {
-    e.preventDefault();
-    if (attempts >= 5 || !isComplete) return;
+  e.preventDefault();
 
-    setSubmitError("");
-    setIsSubmitting(true);
+  if (attempts >= 5 || !isComplete) return;
 
-    try {
-      const code = otpValues.join("");
-      const response = await verifyOtp(mobileNumber, code);
+  setSubmitError("");
+  setIsSubmitting(true);
 
-      if (response.success) {
-        navigate("/success");
-        setRegistrationStep(2);
-      } else {
-        const newAttempts = attempts + 1;
-        setAttempts(newAttempts);
-        setOtpValues(["", "", "", "", "", ""]);
-        inputRefs.current[0]?.focus();
+  try {
+    const code = otpValues.join("");
 
-        setSubmitError(
-          newAttempts >= 5
-            ? "Maximum verification attempts reached. Please request a new OTP."
-            : `Incorrect code. ${5 - newAttempts} attempt(s) remaining.`
-        );
-      }
-    } catch (error) {
-      console.error(error);
-      setSubmitError("Something went wrong. Please try again.");
-    } finally {
-      setIsSubmitting(false);
+    const response = await verifyOtp(userData?.id, code);
+
+    if (response.success) {
+      setRegistrationStep(2);
+      navigate("/success");
+    } else {
+      const newAttempts = attempts + 1;
+
+      setAttempts(newAttempts);
+      setOtpValues(["", "", "", "", "", ""]);
+      inputRefs.current[0]?.focus();
+
+      setSubmitError(
+        newAttempts >= 5
+          ? "Maximum verification attempts reached. Please request a new OTP."
+          : `Incorrect code. ${5 - newAttempts} attempt(s) remaining.`
+      );
     }
+  } catch (error) {
+    console.error("OTP verification error:", error);
+    setSubmitError(
+      error.message || "Something went wrong. Please try again."
+    );
+  } finally {
+    setIsSubmitting(false);
   }
+}
+
 
   function handleResend() {
     setTimer(60);
