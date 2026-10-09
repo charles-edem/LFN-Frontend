@@ -1,118 +1,110 @@
-LFN Frontend
+# LFN Frontend
 
-A React and Vite frontend application for LFN, featuring user registration, OTP verification, a success flow, and an admin dashboard.
+A React + Vite frontend for LFN. It covers the user sign-up journey (registration, OTP verification, success confirmation) and includes an admin dashboard. The app currently runs against a mock API, so it can be developed and tested without a backend.
 
-Features
-User registration
-OTP verification
-Registration success flow
-Admin dashboard
-Mock API for development
-Responsive interface
-Client-side routing
-ESLint configuration
-Tech Stack
-React
-Vite
-JavaScript
-React Router
-CSS Modules
-ESLint
+ **Status:** Active development. Some functionality still uses mock data.
 
-Getting Started
-Requirements
-Node.js
-npm
-Git
-Installation
+## Features
 
-Clone the repository:
+- User registration
+- OTP verification
+- Registration success page
+- Admin dashboard
+- Mock API for local development
+- Responsive layout
+- Client-side routing with React Router
+- Component-scoped styling with CSS Modules
+- ESLint for code quality
 
+## Tech Stack
+
+| Area | Tool |
+| --- | --- |
+| UI library | React |
+| Build tool | Vite |
+| Language | JavaScript |
+| Routing | React Router |
+| Styling | CSS Modules |
+| Linting | ESLint |
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) and npm
+- [Git](https://git-scm.com/)
+
+### Installation
+
+```bash
+# Clone the repository
 git clone https://github.com/charles-edem/LFN-Frontend.git
 
-
-Move into the project directory:
-
+# Move into the project
 cd LFN-Frontend
 
-
-Install dependencies:
-
+# Install dependencies
 npm install
 
-
-Start the development server:
-
+# Start the development server
 npm run dev
+```
 
+Vite will print the local URL when it starts, usually <http://localhost:5173>.
 
-The application will be available at the local URL provided by Vite, usually:
+## Scripts
 
-http://localhost:5173
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Starts the development server |
+| `npm run build` | Creates a production build |
+| `npm run preview` | Serves the production build locally |
+| `npm run lint` | Runs ESLint |
 
-Available Scripts
-Command	Description
-npm run dev	Start development server
-npm run build	Create production build
-npm run preview	Preview production build
-npm run lint	Run ESLint
-Application Flow
-Landing Page
-     |
-     v
-Registration
-     |
-     v
-OTP Verification
-     |
-     v
-Success
+## User Flow
 
+```mermaid
+flowchart LR
+    A[Landing Page] --> B[Registration]
+    B --> C[OTP Verification]
+    C --> D[Success]
+```
 
-The application also includes a separate admin dashboard.
+The admin dashboard is a separate part of the app and is not part of this flow.
 
-Mock API
+## Mock API
 
-Development API functionality is currently handled through:
+There is no production backend connected yet. API calls during development are handled by:
 
+```
 src/lib/mockApi.js
+```
 
+Because of this, data (including registrations and OTP behaviour) is simulated. When a real backend is ready, this file is the place to swap in real requests.
 
-This allows the frontend to be developed and tested without requiring a production backend.
+## Styling
 
-Styling
+Each page or component has its own CSS Module, so styles stay scoped and don't clash. Examples:
 
-The project uses CSS Modules for component-specific styling.
+- `LandingPage.module.css`
+- `SuccessPage.module.css`
+- `AdminDashboard.module.css`
 
-Examples:
+## Environment Variables
 
-AdminDashboard.module.css
-LandingPage.module.css
-SuccessPage.module.css
+If you need to configure the app, create a `.env` file in the project root. Vite only exposes variables prefixed with `VITE_`.
 
-Environment Variables
-
-If environment variables are required, create a .env file in the project root.
-
-Example:
-
+```env
 VITE_API_URL=http://localhost:3000
+```
 
+Never commit passwords, API keys, tokens, or other secrets. Make sure `.env` is listed in `.gitignore`.
 
-Do not commit passwords, API keys, tokens, or other sensitive information.
+## Roadmap
 
-Project Status
+- [ ] Connect to a real backend in place of `mockApi.js`
+- [ ] Finish and harden the admin dashboard
 
-Active Development
+## Author
 
-The frontend is currently under development, with some functionality using mock API data.
-
-Author
-
-Charles Edem
-
-GitHub: @charles-edem
-
-Repository
-
-LFN Frontend
+**Charles Edem** — [@charles-edem](https://github.com/charles-edem)
